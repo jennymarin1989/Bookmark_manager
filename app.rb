@@ -16,11 +16,20 @@ class BookmarkManager < Sinatra::Base
     erb :add_new_links
   end
 
+  post '/add_link' do
+    erb :add_new_links
+  end
+
   post '/create_new_link' do
     # redirect '/' if Link.add_new_link(params[:new_link])
     # flash[:error] = "This is not a link"
-    flash[:notice] = "You must submit a valid URL." unless Link.add_new_link(params[:new_link])
-    redirect('/')
+    begin
+      Link.add_new_link(params[:new_link])
+      redirect '/'
+    rescue Exception => error
+      flash[:notice] = error.message
+    end
+    redirect('/add_link')
   end
 
   run! if app_file == $0

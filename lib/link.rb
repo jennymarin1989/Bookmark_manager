@@ -9,13 +9,13 @@ class Link
   end
 
   def self.add_new_link(new_link)
-    return false unless working_link?(new_link)
+    raise "You must submit a valid URL." unless working_link?(new_link)
     DatabaseConnection.query("INSERT INTO links(url) VALUES('#{new_link}')")
   end
 
   private
 
   def self.working_link?(new_link)
-     new_link =~ URI::DEFAULT_PARSER.regexp[:ABS_URI]
+    new_link =~ URI::DEFAULT_PARSER.regexp[:ABS_URI]
   end
 end

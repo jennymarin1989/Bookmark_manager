@@ -11,8 +11,8 @@ describe Link do
   end
   context '.add_new_link' do
     it 'add new link to the end of bookmark list' do
-      Link.add_new_link('http:// www.testlink.com')
-      expect(Link.all).to include 'http:// www.testlink.com'
+      Link.add_new_link('http://www.testlink.com')
+      expect(Link.all).to include('http://www.testlink.com')
     end
   end
 end
