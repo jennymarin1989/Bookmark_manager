@@ -1,4 +1,6 @@
 require 'pg'
+require 'uri'
+require './lib/database_connection'
 
 class Link
   def self.all
@@ -7,6 +9,13 @@ class Link
   end
 
   def self.add_new_link(new_link)
-    add_link_to_database = DatabaseConnection.query("INSERT INTO links(url) VALUES('#{new_link}')")
+    return false unless working_link?(new_link)
+    DatabaseConnection.query("INSERT INTO links(url) VALUES('#{new_link}')")
+  end
+
+  private
+
+  def self.working_link?(new_link)
+     new_link =~ URI::DEFAULT_PARSER.regexp[:ABS_URI]
   end
 end
