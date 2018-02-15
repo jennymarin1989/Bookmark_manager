@@ -3,13 +3,14 @@ require 'uri'
 require './lib/database_connection'
 
 class Link
+
+  def initialize(id, url)
+    @id = id
+    @url = url
+  end
+
   def self.all
     result = DatabaseConnection.query("SELECT * FROM links")
-    p "Select * FROM links"
-    p result
-    p "result . map over url"
-    result.map { |link| link['url'] }
-    p(result.map { |link| link['url'] })
   end
 
   def self.add_new_link(new_link)
