@@ -21,10 +21,8 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/create_new_link' do
-    # redirect '/' if Link.add_new_link(params[:new_link])
-    # flash[:error] = "This is not a link"
     begin
-      Link.add_new_link(params[:new_link])
+      Link.add_new_link(params[:new_link],params[:title])
       redirect '/'
     rescue Exception => error
       flash[:notice] = error.message

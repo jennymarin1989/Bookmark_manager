@@ -1,11 +1,16 @@
-<h2> If you want to add new links then click the button below! </h2>
-
-<form action="/add_link" method="post">
-  <input type="submit" value="Add new link">
-</form>
-
-<ul>
-  <% @links.each do |link| %>
-  <li><%= link %></li>
-  <% end %>
-</ul>
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+  <h1> If you want to add new links then click the button below! </h1>
+      <% @links.each do |link| %>
+      <h3>
+        <li> <%= link.title %> </li>
+      </h3>
+      <% end %>
+    <form action="/add_link" method="post">
+      <input type="submit" value="Add new link">
+    </form>
+  </body>
+</html>

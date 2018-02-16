@@ -7,7 +7,7 @@ task :setup do
     connection = PG.connect
     connection.exec("CREATE DATABASE #{ database };")
     connection = PG.connect(dbname: database)
-    connection.exec("CREATE TABLE links(id SERIAL PRIMARY KEY, url VARCHAR(60));")
+    connection.exec("CREATE TABLE links(id SERIAL PRIMARY KEY, url VARCHAR(60), title VARCHAR(60));")
   end
 end
 
@@ -18,8 +18,8 @@ task :test_database_setup do
 
     DatabaseConnection.setup("bookmark_manager_test")
     DatabaseConnection.query("TRUNCATE links")
-    DatabaseConnection.query("INSERT INTO links VALUES(1, 'http://www.makersacademy.com')")
-    DatabaseConnection.query("INSERT INTO links VALUES(2, 'http://www.google.com')")
-    DatabaseConnection.query("INSERT INTO links VALUES(3, 'http://www.facebook.com')")
+    DatabaseConnection.query("INSERT INTO links VALUES(1, 'http://www.makersacademy.com', 'makersacademy')")
+    DatabaseConnection.query("INSERT INTO links VALUES(2, 'http://www.google.com', 'google')")
+    DatabaseConnection.query("INSERT INTO links VALUES(3, 'http://www.facebook.com', 'facebook')")
   end
 end
