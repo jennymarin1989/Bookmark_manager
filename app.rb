@@ -31,9 +31,14 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/delete_link' do
+    begin
     Link.delete_link(params[:title])
     redirect '/'
+  rescue Exception => error
+    flash[:notice] = error.message
   end
+  redirect '/delete_link'
+end
 
   get '/update_link' do
     erb :update_link

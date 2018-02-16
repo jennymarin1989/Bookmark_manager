@@ -25,6 +25,8 @@ class Link
   end
 
   def self.delete_link(title)
+    p title_exists?(title)
+    raise "This link doesn't exist" unless title_exists?(title)
     DatabaseConnection.query("DELETE FROM links WHERE title = '#{title}'")
   end
 
@@ -37,4 +39,10 @@ class Link
   def self.working_link?(new_link)
     new_link =~ URI::DEFAULT_PARSER.regexp[:ABS_URI]
   end
+
+   def self.title_exists?(title) #=== params[title]
+     result = DatabaseConnection.query("SELECT * FROM links")
+      result.map{|link| link['title']}.include?(title)
+   end
+
 end

@@ -32,6 +32,9 @@ describe Link do
       titles = links.map(&:title)
       expect(titles).not_to include 'google'
     end
+    it "returns an error if link doesn't exist" do
+      expect{Link.delete_link('hi')}.to raise_error "This link doesn't exist"
+    end
   end
 
   describe "./update_link" do
