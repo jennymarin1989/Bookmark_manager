@@ -16,10 +16,6 @@ class BookmarkManager < Sinatra::Base
     erb :add_new_links
   end
 
-  post '/add_link' do
-    erb :add_new_links
-  end
-
   post '/create_new_link' do
     begin
       Link.add_new_link(params[:new_link],params[:title])
@@ -28,6 +24,15 @@ class BookmarkManager < Sinatra::Base
       flash[:notice] = error.message
     end
     redirect('/add_link')
+  end
+
+  get '/delete_link' do
+    erb :delete_link
+  end
+
+  post '/delete_link' do
+    Link.delete_link(params[:title])
+    redirect '/'
   end
 
   run! if app_file == $0
