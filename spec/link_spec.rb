@@ -34,4 +34,16 @@ describe Link do
     end
   end
 
+  describe "./update_link" do
+    it "updates the link with a new link and title" do
+      Link.update_link('google', 'tweeter', 'http://www.tweeter.com')
+      links = Link.all
+      titles = links.map(&:title)
+      urls = links.map(&:url)
+      expect(titles).not_to include 'google'
+      expect(titles).to include 'tweeter'
+      expect(urls).to include 'http://www.tweeter.com'
+    end
+  end
+
 end

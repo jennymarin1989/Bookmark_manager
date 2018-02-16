@@ -35,5 +35,14 @@ class BookmarkManager < Sinatra::Base
     redirect '/'
   end
 
+  get '/update_link' do
+    erb :update_link
+  end
+
+  post '/update_link' do
+    Link.update_link(params[:title], params[:new_title], params[:new_url])
+    redirect '/'
+  end
+
   run! if app_file == $0
 end
